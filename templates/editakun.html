@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block title %}Edit Akun | Parking (AI) System{% endblock %}
+{% block content %}
+
+<body>
+    <!-- Start Header Top Area -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="logo-area">
+                        <a href="{{ url_for('dashboard') }}"><img src="../static/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav notika-top-nav">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a data-toggle="collapse" data-target="#Charts" href="#">Dashboard</a>
+                                    <ul class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Chart</a>
+                                    <ul id="demolibra" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('barchart') }}">Bar Charts</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Data</a>
+                                    <ul id="demodepart" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('histori') }}">Data Table</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
+                                    <ul id="Pagemob" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                                        <li><a href="{{ url_for('setting') }}">Setting</a>
+                                        <li><a href="{{ url_for('barchart') }}">Log Out</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i>Home</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Chart</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Data</a>
+                        </li>
+                        <li class="active"><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i>
+                                Pages</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('dashboard') }}">Dashboard</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('barchart') }}">Bar Charts</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('histori') }}">Table Data</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Page" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                                </li>
+                                <li><a href="{{ url_for('setting') }}">Setting</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Log
+                                        Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+    <!-- Start Status area -->
+    <div class="container">
+        <h2>Parking (AI) System</h2>
+    </div>
+    <!-- End Status area-->
+    <!-- Start Sale Statistic area-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <form id="edit-akun-form" class="form-example-wrap mg-t-30" style="margin-bottom: 70px;" method="POST">
+                    <div class="cmp-tb-hd cmp-int-hd">
+                        <h2>Edit Akun</h2>
+                    </div>
+                    <div id="alert-container"></div>
+                    <div class="form-example-int form-horizental">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                                    <label class="hrzn-fm">Username</label>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                    <div class="nk-int-st">
+                                        <input type="text" id="username" name="username" class="form-control input-sm" placeholder="Username" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-example-int form-horizental mg-t-15">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                                    <label class="hrzn-fm">Email</label>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                    <div class="nk-int-st">
+                                        <input type="email" id="email" name="email" class="form-control input-sm" placeholder="Email" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-example-int form-horizental mg-t-15">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                                    <label class="hrzn-fm">Password</label>
+                                </div>
+                                <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                    <div class="nk-int-st">
+                                        <input type="password" id="password" name="password" class="form-control input-sm" placeholder="Password" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-example-int mg-t-15">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                            <div class="col-lg-8 col-md-7 col-sm-7 col-xs-12">
+                                <button type="submit" class="btn btn-success notika-btn-success">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End Sale Statistic area-->
+    <script>
+        $(document).ready(function () {
+            // Fetch current user data
+            $.get('/get_akun', function (data) {
+                if (data.username) {
+                    $('#username').val(data.username);
+                    $('#email').val(data.email);
+                }
+            });
+
+            // Submit form
+            $('#edit-akun-form').on('submit', function (event) {
+                event.preventDefault();
+                var formData = {
+                    username: $('#username').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                };
+
+                $.ajax({
+                    url: '/update_akun',
+                    method: 'POST',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.success) {
+                            $('#alert-container').html(
+                                '<div class="alert alert-success alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Data berhasil diperbarui' +
+                                '</div>'
+                            );
+                        } else {
+                            $('#alert-container').html(
+                                '<div class="alert alert-danger alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Failed to update account: ' + response.message +
+                                '</div>'
+                            );
+                        }
+
+                        // Remove the alert after 5 seconds
+                        setTimeout(function () {
+                            $('.alert').alert('close');
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+    {% endblock %}

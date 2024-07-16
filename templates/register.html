@@ -1,0 +1,78 @@
+{% extends 'baselnr.html' %}
+
+{% block title %}Register | Parking (AI) System{% endblock %}
+
+{% block content %}
+<!-- Register area Start -->
+<div class="login-content">
+    <!-- Register -->
+    <div class="nk-block toggled" id="l-register">
+        <form action="{{ url_for('register') }}" method="post">
+            <div class="nk-form">
+                <h2>Register</h2>
+                <span>please Regist first</span>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div id="alert-container">
+                            
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% set success = false %}
+                        {% for category, message in messages %}
+                            {% if category == 'success' %}
+                                {% set success = true %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if success %}
+                            <script>
+                                setTimeout(function() {
+                                    window.location.href = "{{ url_for('index') }}";
+                                }, 2000); // Redirect after 3 seconds
+                            </script>
+                        {% endif %}
+                    {% endif %}
+                {% endwith %}
+                <div class="input-group" style="margin-top: 50px;">
+                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+                    <div class="nk-int-st">
+                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                    </div>
+                </div>
+                <div class="input-group mg-t-15">
+                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-mail"></i></span>
+                    <div class="nk-int-st">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="input-group mg-t-15">
+                    <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+                    <div class="nk-int-st">
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-login btn-success btn-float"><i
+                        class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
+            </div>
+        </form>
+        <div class="nk-navigation nk-lg-ic">
+            <a href="{{ url_for('index') }}" data-ma-block="#l-register"><i class="notika-icon notika-plus-symbol"></i>
+                <span>Login</span></a>
+        </div>
+    </div>
+</div>
+<!-- Register area End -->
+
+<!-- Script to auto-hide alerts after 3 seconds -->
+<script>
+    setTimeout(function() {
+        $(".alert").fadeOut("slow");
+    }, 3000);
+</script>
+{% endblock %}

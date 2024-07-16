@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Parking (AI) System{% endblock %}
+{% block content %}
+
+<body>
+  <!-- Start Header Top Area -->
+  <div class="header-top-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <div class="logo-area">
+            <a href="{{ url_for('dashboard') }}"><img src="../static/img/logo/logo.png" alt="" /></a>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <div class="header-top-menu">
+            <ul class="nav navbar-nav notika-top-nav">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Header Top Area -->
+  <!-- Mobile Menu start -->
+  <div class="mobile-menu-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="mobile-menu">
+            <nav id="dropdown">
+              <ul class="mobile-menu-nav">
+                <li><a data-toggle="collapse" data-target="#Charts" href="#">Dashboard</a>
+                  <ul class="collapse dropdown-header-top">
+                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                  </ul>
+                </li>
+                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Chart</a>
+                  <ul id="demolibra" class="collapse dropdown-header-top">
+                    <li><a href="{{ url_for('barchart') }}">Bar Charts</a></li>
+                  </ul>
+                </li>
+                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Data</a>
+                  <ul id="demodepart" class="collapse dropdown-header-top">
+                    <li><a href="{{ url_for('histori') }}">Data Table</a></li>
+                  </ul>
+                </li>
+                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
+                  <ul id="Pagemob" class="collapse dropdown-header-top">
+                    <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                    <li><a href="{{ url_for('setting') }}">Setting</a>
+                    <li><a href="{{ url_for('barchart') }}">Log Out</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile Menu end -->
+  <!-- Main Menu area start-->
+  <div class="main-menu-area mg-tb-40">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+            <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i>Home</a>
+            </li>
+            <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Chart</a>
+            </li>
+            <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Data</a>
+            </li>
+            <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
+            </li>
+          </ul>
+          <div class="tab-content custom-menu-content">
+            <div id="Home" class="tab-pane active notika-tab-menu-bg animated flipInX">
+              <ul class="notika-main-menu-dropdown">
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a>
+                </li>
+              </ul>
+            </div>
+            <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
+              <ul class="notika-main-menu-dropdown">
+                <li><a href="{{ url_for('barchart') }}">Bar Charts</a>
+                </li>
+              </ul>
+            </div>
+            <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
+              <ul class="notika-main-menu-dropdown">
+                <li><a href="{{ url_for('histori') }}">Table Data</a>
+                </li>
+              </ul>
+            </div>
+            <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+              <ul class="notika-main-menu-dropdown">
+                <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                </li>
+                <li><a href="{{ url_for('setting') }}">Setting</a>
+                </li>
+                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Main Menu area End-->
+  <!-- Start Status area -->
+  <div class="container">
+    <h2>Parking (AI) System</h2>
+  </div>
+  <!-- End Status area-->
+  <!-- Start Sale Statistic area-->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="sale-statistic-inner notika-shadow">
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group" style="width: 300px;">
+                  <label for="sourceSelect">Select Video Source:</label>
+                  <select class="form-control" id="sourceSelect" onchange="toggleSourceInput()">
+                    <option value="none">Choose...</option>
+                    <option value="ip">IP Camera</option>
+                    <option value="file">Upload Video</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group" id="ipInput" style="display: none; width: 300px;">
+                  <label for="ipLink">Enter IP Camera Link:</label>
+                  <input type="text" class="form-control" id="ipLink" placeholder="http://...">
+                </div>
+                <div class="form-group" id="fileInput" style="display: none; width: 300px;">
+                  <label for="videoFile">Upload Video File:</label>
+                  <input type="file" class="form-control" id="videoFile" accept="video/*" onchange="autoUpload()">
+                  <div id="uploadLoader" class="loader"></div>
+                </div>
+                <div id="uploadMessage" style="display: none; margin-top: 10px;">Video already streaming</div>
+              </div>
+            </div>
+            <button class="btn btn-success btn-icon-notika notika-btn-success waves-effect" id="startButton"
+              onclick="startStream()"><i class="notika-icon notika-checked"></i> Start Stream</button>
+            <button class="btn btn-secondary notika-btn-info waves-effect" id="stopButton" onclick="stopStream()"
+              style="display: none;">Stop Stream</button>
+            <button class="btn btn-info notika-btn-info waves-effect btn-icon-notika" id="resetButton"
+              onclick="resetPage()"><i class="notika-icon notika-refresh"></i> Reset</button>
+            <br><br>
+            <div class="mt-3">
+              <img id="videoStream" src="../static/img/uvd.png" class="img-fluid">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Sale Statistic area-->
+   
+  {% endblock %}

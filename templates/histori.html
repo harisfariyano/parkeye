@@ -1,0 +1,340 @@
+{% extends 'base.html' %}
+{% block title %}Data Table | Parking (AI) System{% endblock %}
+{% block content %}
+
+<body>
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="logo-area">
+                        <a href="{{ url_for('dashboard') }}"><img src="../static/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                    <div class="header-top-menu">
+                        <ul class="nav navbar-nav notika-top-nav">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Header Top Area -->
+    <!-- Mobile Menu start -->
+    <div class="mobile-menu-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="mobile-menu">
+                        <nav id="dropdown">
+                            <ul class="mobile-menu-nav">
+                                <li><a data-toggle="collapse" data-target="#Charts" href="#">Dashboard</a>
+                                    <ul class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Chart</a>
+                                    <ul id="demolibra" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('barchart') }}">Bar Charts</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Data</a>
+                                    <ul id="demodepart" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('histori') }}">Data Table</a></li>
+                                    </ul>
+                                </li>
+                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
+                                    <ul id="Pagemob" class="collapse dropdown-header-top">
+                                        <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                                        <li><a href="{{ url_for('setting') }}">Setting</a>
+                                        <li><a href="{{ url_for('barchart') }}">Log Out</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Menu end -->
+    
+    <!-- Main Menu area start-->
+    <div class="main-menu-area mg-tb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                        <li><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Chart</a>
+                        </li>
+                        <li class="active"><a data-toggle="tab" href="#Tables"><i
+                                    class="notika-icon notika-windows"></i> Data</a>
+                        </li>
+                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content custom-menu-content">
+                        <div id="Home" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('dashboard') }}">Dashboard</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('barchart') }}">Bar Chart</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Tables" class="tab-pane active notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('histori') }}">Tabele Data</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+                            <ul class="notika-main-menu-dropdown">
+                                <li><a href="{{ url_for('editakun') }}">Edit Profil</a>
+                                </li>
+                                <li><a href="{{ url_for('editakun') }}">Setting</a>
+                                </li>
+                                <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Log
+                                        Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Menu area End-->
+    <!-- Start Status area -->
+    <div class="container">
+        <h2>Histori</h2>
+    </div>
+    <!-- Data Table area Start-->
+    <div class="data-table-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="data-table-list">
+                        <div class="basic-tb-hd">
+                            <h2>Parking (AI) System</h2>
+                        </div>
+                        <div id="alert-container"></div>
+                        <div class="bsc-tbl-st">
+                            <table id="data-table-basic1" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Penghalang</th>
+                                        <th>Waktu Masuk</th>
+                                        <th>Total Waktu</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be dynamically added here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Data Table area End-->
+
+    <!-- Modal for updating records -->
+    <div id="updateModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="update-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Record</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="update-id">
+                        <div class="form-group">
+                            <label for="update-label">Penghalang:</label>
+                            <input type="text" class="form-control" id="update-label" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="update-tanggal_masuk">Waktu Masuk:</label>
+                            <input type="datetime-local" class="form-control" id="update-tanggal_masuk" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="update-total_waktu">Total Waktu:</label>
+                            <input type="number" class="form-control" id="update-total_waktu" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for deleting records -->
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Record </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this record?</p>
+                    <input type="hidden" id="delete-id">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="confirm-delete">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function formatTotalWaktu(seconds) {
+                if (seconds >= 60) {
+                    let minutes = Math.floor(seconds / 60);
+                    let remainderSeconds = seconds % 60;
+                    return minutes + ' menit' + (remainderSeconds ? ' ' + remainderSeconds + ' detik' : '');
+                }
+                return seconds + ' detik';
+            }
+
+            // Fetch data from the server and populate the table
+            function loadTableData() {
+                $.ajax({
+                    url: '/get_histori',
+                    method: 'GET',
+                    success: function (data) {
+                        var tbody = $('#data-table-basic1 tbody');
+                        tbody.empty();  // Clear the table body
+                        $.each(data, function (index, item) {
+                            var formattedTotalWaktu = formatTotalWaktu(parseInt(item.total_waktu));
+                            var row = '<tr>' +
+                                '<td>' + item.id + '</td>' +
+                                '<td>' + item.label + '</td>' +
+                                '<td>' + item.tanggal_masuk + '</td>' +
+                                '<td>' + formattedTotalWaktu + '</td>' +
+                                '<td>' +
+                                // '<button class="btn btn-warning btn-sm update-btn" data-id="' + item.id + '">Update</button> ' +
+                                '<button class="btn btn-danger btn-sm delete-btn" data-id="' + item.id + '">Delete</button>' +
+                                '</td>' +
+                                '</tr>';
+                            tbody.append(row);
+                        });
+                    }
+                });
+            }
+
+            // Initial load
+            loadTableData();
+
+            // Add event listeners for update and delete buttons
+            $(document).on('click', '.update-btn', function () {
+                var id = $(this).data('id');
+                var row = $(this).closest('tr');
+                $('#update-id').val(id);
+                $('#update-label').val(row.find('td').eq(1).text());
+                $('#update-tanggal_masuk').val(row.find('td').eq(2).text().replace(' ', 'T'));
+                $('#update-total_waktu').val(row.find('td').eq(3).text().split(' ')[0]); // Only get the number part
+                $('#updateModal').modal('show');
+            });
+
+            $('#update-form').on('submit', function (event) {
+                event.preventDefault();
+                var formData = {
+                    id: $('#update-id').val(),
+                    label: $('#update-label').val(),
+                    tanggal_masuk: $('#update-tanggal_masuk').val(),
+                    total_waktu: $('#update-total_waktu').val()
+                };
+
+                $.ajax({
+                    url: '/update_histori',
+                    method: 'POST',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.success) {
+                            $('#alert-container').html(
+                                '<div class="alert alert-success alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Data berhasil diperbarui' +
+                                '</div>'
+                            );
+                            $('#updateModal').modal('hide');
+                            loadTableData(); // Reload the data
+                        } else {
+                            $('#alert-container').html(
+                                '<div class="alert alert-danger alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Failed to update account: ' + response.message +
+                                '</div>'
+                            );
+                        }
+                        setTimeout(function () {
+                            $('.alert').fadeOut('slow');
+                        }, 3000);
+                    }
+                });
+            });
+
+            $(document).on('click', '.delete-btn', function () {
+                var id = $(this).data('id');
+                $('#delete-id').val(id);
+                $('#deleteModal').modal('show');
+            });
+
+            $('#confirm-delete').on('click', function () {
+                var id = $('#delete-id').val();
+                $.ajax({
+                    url: '/delete_histori',
+                    method: 'POST',
+                    data: JSON.stringify({ id: id }),
+                    contentType: 'application/json',
+                    success: function (response) {
+                        if (response.success) {
+                            $('#alert-container').html(
+                                '<div class="alert alert-success alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Data berhasil dihapus' +
+                                '</div>'
+                            );
+                            $('#deleteModal').modal('hide');
+                            loadTableData(); // Reload the data
+                        } else {
+                            $('#alert-container').html(
+                                '<div class="alert alert-danger alert-dismissible" role="alert">' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                                '<span aria-hidden="true">&times;</span></button>' +
+                                'Failed to delete record: ' + response.message +
+                                '</div>'
+                            );
+                        }
+                        setTimeout(function () {
+                            $('.alert').fadeOut('slow');
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
+    {% endblock %}

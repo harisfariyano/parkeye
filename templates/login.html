@@ -1,0 +1,122 @@
+{% extends 'baselnr.html' %}
+
+{% block title %}Login | Parking (AI) System{% endblock %}
+
+{% block content %}
+<!-- Login area Start -->
+<div class="login-content">
+  <!-- Login -->
+  <div class="nk-block toggled" id="l-login">
+    <form id="login-form" action="/login" method="post">
+      <div class="nk-form">
+        <h2>Login</h2>
+        <span>please login first</span>
+        <div id="alert-container"></div>
+        <div class="input-group" style="margin-top: 50px;">
+          <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
+          <div class="nk-int-st">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+          </div>
+        </div>
+        <div class="input-group mg-t-15">
+          <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
+          <div class="nk-int-st">
+            <input type="password" name="password" class="form-control form-control-login-form" placeholder="Password"
+              required>
+          </div>
+        </div>
+        <div class="fm-checkbox">
+          <label><input type="checkbox" id="keep-signed-in" class="i-checks"> <i></i> Keep me signed in</label>
+        </div>
+        <button type="submit" class="btn btn-login btn-success btn-float"><i
+            class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
+      </div>
+    </form>
+    <div class="nk-navigation nk-lg-ic">
+      <a href="{{ url_for('register') }}" data-ma-block="#l-register"><i class="notika-icon notika-plus-symbol"></i>
+        <span>Register</span></a>
+    </div>
+  </div>
+</div>
+<!-- Login area End -->
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Mencegah form dari submit secara default
+
+    var checkbox = document.getElementById('keep-signed-in');
+    if (!checkbox.checked) {
+      showAlert('danger', 'Please check the "Keep me signed in" checkbox to proceed.');
+    } else {
+      var form = event.target;
+      var formData = new FormData(form);
+
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          Swal.fire({
+            title: "Success",
+            text: "Login successful!",
+            icon: "success",
+            confirmButtonText: "OK"
+          }).then(() => {
+            window.location.href = data.redirect;
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: data.message,
+            icon: "error",
+            confirmButtonText: "OK"
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          title: "Error",
+          text: "Something went wrong!",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+      });
+    }
+  });
+
+  function showAlert(type, message) {
+    var alertHtml = '<div id="login-alert" class="alert alert-' + type + ' alert-dismissible" role="alert">' +
+      '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+      '<span aria-hidden="true">&times;</span></button>' +
+      message +
+      '</div>';
+
+    document.getElementById('alert-container').innerHTML = alertHtml;
+
+    // Hilangkan alert setelah 3 detik
+    setTimeout(function () {
+      var alert = document.getElementById('login-alert');
+      if (alert) {
+        alert.remove();
+      }
+    }, 3000); // 3000 milidetik = 3 detik
+  }
+</script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  (function () {
+    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/66893766e1e4f70f24ee1f3c/1i2400r1a';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<!--End of Tawk.to Script-->
+{% endblock %}
